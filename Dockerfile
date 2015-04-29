@@ -19,4 +19,5 @@ RUN apt-get clean && apt-get update
 
 RUN apt-get install -y \
   python-setuptools \
-  build-essential
+  build-essential \
+  mono-complete
