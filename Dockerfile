@@ -1,23 +1,12 @@
-FROM ubuntu:14.04
+FROM julia:0.3.7
 
 MAINTAINER Michael Mann <michael.mann@nlplogix.com>
 
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install -y software-properties-common
+RUN apt-get update && apt-get install -y python curl git python-dev software-properties-common python-setuptools build-essential vim
 
-RUN add-apt-repository -y ppa:staticfloat/juliareleases
-RUN add-apt-repository -y ppa:staticfloat/julia-deps
-RUN apt-get update
-RUN apt-get install -y julia
+RUN curl -o /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py
+RUN python /tmp/get-pip.py
+RUN pip install deap numpy
 
-RUN julia -e 'Pkg.add("NumericExtensions");Pkg.add("JSON");Pkg.add("MNIST");Pkg.add("HTTPClient");Pkg.add("Datetime");Pkg.add("StatsBase");Pkg.add("Codecs");Pkg.add("DataFrames");Pkg.add("HDF5");Pkg.add("Gadfly");Pkg.add("PyCall");Pkg.update()'
-
-
-RUN add-apt-repository -y ppa:fkrull/deadsnakes
-RUN apt-get clean && apt-get update
-
-RUN apt-get install -y \
-  python-setuptools \
-  build-essential \
-  mono-complete
+COPY bootstrap-julia.jl /tmp/
+RUN julia /tmp/bootstrap-julia.jl
