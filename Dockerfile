@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y python curl git python-dev software-pro
 
 RUN curl -o /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py
 RUN python /tmp/get-pip.py
-RUN pip install deap numpy
+RUN pip install deap numpy hyperopt pymongo networkx
 
 COPY bootstrap-julia.jl /tmp/
 RUN julia /tmp/bootstrap-julia.jl
