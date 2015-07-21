@@ -9,4 +9,5 @@ Pkg.add("DataFrames");
 Pkg.add("HDF5");
 Pkg.add("Gadfly");
 Pkg.add("PyCall");
+Pkg.add("GLM");
 Pkg.update();
